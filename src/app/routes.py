@@ -4,7 +4,12 @@ from flask_restplus import Resource, fields, regparse
 from main import fetch_data
 
 data_args = regparse.RequestParser()
+data_args.add_argument('ratings', type=float, required=False)
+data_args.add_argument('reviews', type=int, required=False)
+data_args.add_argument('price', type=int, required=False)
 data_args.add_argument('cuisine', type=str, required=False)
+data_args.add_argument('location', type=str, required=False)
+
 
 def setup_routes(app):
     name_space = app.namespace('AltDataScraper', description='Scrap alternative data from a website')
@@ -22,3 +27,5 @@ def setup_routes(app):
                 cuis_type = args['cuisine']
                 response = fetch_data(cuis_type)
                 return response
+            except Exception:
+                pass

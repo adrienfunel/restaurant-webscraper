@@ -6,6 +6,9 @@ except ImportError:
     werkzeug.cached_property = werkzeug.utils.cached_property
     from flask_restplus import Api
 from app.routes import setup_routes
+import logging
+
+logger = logging.getLogger()
 
 
 def create_app():
@@ -18,6 +21,7 @@ def create_app():
 def run():
     flask = create_app()
     flask.run()
+    logger.info("****** SERVICE STARTED ******")
 
 if __name__ == "__main__":
-    create_app()
+    run()
