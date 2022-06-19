@@ -9,9 +9,14 @@ from constant import URL
 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.get(URL)
+sleep(2)
+# Scroll to the bottom to dynamically upload the full HTML source code
+driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+sleep(5)
 
 
 def main():
+    """Main entry point"""
     page = collected = 0
     while True:
         sleep(1)
