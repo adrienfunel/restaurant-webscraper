@@ -19,3 +19,9 @@ def parse_webpage(source):
 
         item['price'] = restaurant.find('span', class_='LFfaIs45Z1IbvWK_HRaH')
 
+        cuis_loc = restaurant.find('div', class_='u9ONW2kqbJZxSOxtuBJq').text
+        item['cuisine'] = cuis_loc.split('•')[1]
+        item['location'] = cuis_loc.split('•')[2]
+
+        data[i] = pd.Series(item)
+    return data.T
