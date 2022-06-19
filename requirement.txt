@@ -1,0 +1,7 @@
+selenium
+webdriver-manager
+bs4
+pandas
+lxml
+re
+time
