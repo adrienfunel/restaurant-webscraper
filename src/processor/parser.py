@@ -17,7 +17,6 @@ def parse_webpage(source):
         reviews = restaurant.find('a', class_='z6Naf_ZXDiazhb9aJLoe')
         item['reviews'] = int(re.search('\d+', reviews.text).group()) if reviews else 'NA'
 
-        # item['price'] = restaurant.find('span', class_='LFfaIs45Z1IbvWK_HRaH').split('AwKuroa75vy0Y4mLkyMr')[0].text
         item['price'] = 4 - restaurant.find('span', class_='AwKuroa75vy0Y4mLkyMr').text.count('$')
 
         cuis_loc = restaurant.find('div', class_='u9ONW2kqbJZxSOxtuBJq').text
@@ -26,3 +25,17 @@ def parse_webpage(source):
 
         data[i] = pd.Series(item)
     return data.T
+
+
+def get_last_page(source):
+    """Function to find the last page with data available"""
+    soup = BeautifulSoup(source, 'lxml')
+    try:
+        page_nb = int(soup.find('a', class_='JINvM1QBDFqby0Geg27_ yGrkuQrH99UKfIE4YXQJ lq_cIcdgZyPE1fNfg6uz mnvRsuAUHkGrXs3xjRoy').text)
+    except AttributeError:
+        page_nb = None
+
+    if page_nb:
+        return page_nb
+    else:
+        return 1
