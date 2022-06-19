@@ -20,8 +20,9 @@ def create_app():
 
 def run():
     flask = create_app()
-    flask.run()
     logger.info("****** SERVICE STARTED ******")
+    flask.run()
+    logger.info("****** SERVICE STOPPED ******")
 
 if __name__ == "__main__":
     run()

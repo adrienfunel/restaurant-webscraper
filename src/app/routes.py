@@ -24,8 +24,16 @@ def setup_routes(app):
         def get(self):
             try:
                 args = data_args.parse_args()
-                cuis_type = args['cuisine']
-                response = fetch_data(cuis_type)
+                ratings, reviews, price, cuisine, location = arg_parser(args)
+                response = fetch_data(ratings, reviews, price, cuisine, location)
                 return response
             except Exception:
                 pass
+
+def arg_parser(args):
+    ratings = args['ratings'] if args['ratings'] else None
+    reviews = args['reviews'] if args['reviews'] else None
+    price = args['price'] if args['price'] else None
+    cuisine = args['cuisine'] if args['cuisine'] else None
+    location = args['location'] if args['location'] else None
+    return ratings, reviews, price, cuisine, location

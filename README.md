@@ -37,3 +37,9 @@ The service extracts the following features from the webpages:
 'cuisine': str,
 'location': str
 ```
+
+### Logging
+The logging strategy is set up in `src/common/my_logger.py`. The logging level is **INFO** and contains all information
+about the service run and the extracted info. The logging module will create a new `logs/` directory with a log file in the project folder to write
+its logs. There are two handler: a file handler to write and store logs, and a stream handler to displays the logs
+during execution.

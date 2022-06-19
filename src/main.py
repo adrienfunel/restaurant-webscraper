@@ -15,7 +15,7 @@ from constant import URL
 logger = logging.getLogger()
 
 
-def fetch_data(cuis_type):
+def fetch_data(ratings, reviews, price, cuisine, location):
     """Main entry point"""
     df = pd.DataFrame()
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -38,12 +38,9 @@ def fetch_data(cuis_type):
         new_data = parser.parse_webpage(element)
         if new_data.empty:
             break
-        if page == 0:
-            df.append(new_data)
-            # new_data.to_csv('output.csv', index=False)
         elif page > 0:
             df.append(new_data)
-            # new_data.to_csv('output.csv', index=False, header=None, mode='a')
+
         page += 1
         collected += len(new_data)
 
@@ -59,4 +56,4 @@ def fetch_data(cuis_type):
 
     driver.close()
 
-    return df[df['cuisine'] == cuis_type]
+    return df[df['cuisine'] == cuisine]
